@@ -1,12 +1,12 @@
-# Advent of Code 2021
+# Advent of Code 2022
 
-Solutions for [advent of code 2021](https://adventofcode.com/2021) in Kotlin.
+My solutions for [advent of code 2022](https://adventofcode.com/2022) in Kotlin.
 
 Stats:
 | Day |  Part 1  |       |  Part 2  |       |
 |----:|----------|------:|----------|------:|
-|  1  | 00:00:00 |     0 | 00:00:00 |     0 |
-|  2  |          |       |          |       |
+|  1  |   done   |       |   done   |       |
+|  2  |   done   |       |   done   |       |
 |  3  |          |       |          |       |
 |  4  |          |       |          |       |
 |  5  |          |       |          |       |
