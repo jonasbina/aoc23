@@ -83,7 +83,6 @@ class Day04(
                 firstList.forEach {
                     if (!summed){
                         if (secondList.contains(it)){
-
                             sum++
                             summed = true
                         }}
