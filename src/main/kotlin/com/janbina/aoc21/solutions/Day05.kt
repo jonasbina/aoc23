@@ -26,7 +26,7 @@ class Day05(
         var stacks = mutableMapOf<Int, MutableList<String>>()
         inputLines.take(8).forEach {
             it.split(' ').forEachIndexed { index, s ->
-                if (s.isNotBlank()) {
+                if (s.isNotBlank()&&s!="...") {
                     if (stacks.contains(index)) {
                         stacks[index]!!.add(s)
                     } else {
@@ -56,7 +56,7 @@ class Day05(
             val removed = flist.take(amount)
             flist = flist.drop(amount).toMutableList()
             val newTlist = if (tlist.isNotEmpty()) tlist.reversed().toMutableList() else mutableListOf()
-            removed.forEach {
+            removed.reversed().forEach {
                 newTlist.add(it)
             }
             tlist = if (newTlist.isNotEmpty()) {
