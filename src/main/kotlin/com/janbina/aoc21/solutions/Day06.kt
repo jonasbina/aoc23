@@ -24,7 +24,7 @@ class Day06(
     fun part1(): Any {
 
         var result = 0
-        var letters = 1
+        var letters = 2
         var this4 = mutableListOf<Char>()
         val line = inputLines[0]
 //        if (result != 0) {
@@ -46,35 +46,87 @@ class Day06(
 //                }
 //            }
 //        }
-        val fours= mutableListOf<String>()
+        val fours = mutableListOf<String>()
 
         line.forEach {
-            if (fours.isNotEmpty()){
-            if (fours[fours.lastIndex].length>=4){
+            if (fours.isNotEmpty()) {
+                if (fours[fours.lastIndex].length >= 4) {
+                    fours.add(it.toString())
+                } else {
+                    fours.set(fours.lastIndex, fours[fours.lastIndex] + it)
+                }
+            } else {
                 fours.add(it.toString())
-            }else{
-                fours.set(fours.lastIndex,fours[fours.lastIndex]+it)
             }
-        }else{
-                fours.add(it.toString())
         }
-        }
-        fours.forEach {
-            if (result<=0) {
-                if (it.toSet().toList().toString().length < 4) {
-
-                }else{
+        fours.forEachIndexed { index, s ->
+            if (result <= 0) {
+//                println("index :$index, $s")
+//                println(s.toSet().toList().toString())
+                if (s.toSet().toList().size == 4) {
                     result = letters
                 }
             }
-            letters+=4
+            letters += 4
         }
 
         return result
     }
 
     fun part2(): Any {
+        var result = 0
+        var letters = 1
+        var this4 = mutableListOf<Char>()
+        val line = inputLines[0]
 
-        return 0
+        val groups = line.windowed(16)
+        println(groups)
+        var done = false
+        groups.forEach {
+
+            if (!done) {
+                if (it.toSet().size == 16) {
+                    done = true
+                    result = letters
+                }
+                letters += 16
+            }
+        }
+//        if (result != 0) {
+//            line.forEach {
+//                this4.add(it)
+//                if (this4.size == 4) {
+//
+//
+//
+//                    this4 = mutableListOf()
+//                }
+//            }
+//        }
+        val fours = mutableListOf<String>()
+
+        line.forEach {
+            if (fours.isNotEmpty()) {
+                if (fours[fours.lastIndex].length >= 4) {
+                    fours.add(it.toString())
+                } else {
+                    fours.set(fours.lastIndex, fours[fours.lastIndex] + it)
+                }
+            } else {
+                fours.add(it.toString())
+            }
+        }
+//        fours.forEachIndexed { index, s ->
+//            if (result <= 0) {
+////                println("index :$index, $s")
+////                println(s.toSet().toList().toString())
+//                if (s.toSet().toList().size == 4) {
+//                    result = letters
+//                }
+//            }
+//            letters += 4
+//        }
+
+        return result
     }
 }
