@@ -62,6 +62,8 @@ class Day06(
         fours.forEach {
             if (result<=0) {
                 if (it.toSet().toList().toString().length < 4) {
+
+                }else{
                     result = letters
                 }
             }
