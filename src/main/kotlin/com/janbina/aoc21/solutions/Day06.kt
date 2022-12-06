@@ -89,7 +89,7 @@ class Day06(
                     done = true
                     result = letters
                 }
-                letters += it.length
+                letters += 1
             }
         }
 
