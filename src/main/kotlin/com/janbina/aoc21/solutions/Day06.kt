@@ -13,7 +13,6 @@ fun main() {
 class Day06(
     private val inputLines: List<String>
 ) {
-
     private val inputInts by lazy { inputLines.map { it.toInt() } }
     private val inputLinesSplitted by lazy {
         inputLines.map {
