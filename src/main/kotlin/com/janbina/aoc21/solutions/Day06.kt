@@ -76,20 +76,20 @@ class Day06(
     fun part2(): Any {
         var result = 0
         var letters = 1
-        var this4 = mutableListOf<Char>()
+
         val line = inputLines[0]
 
-        val groups = line.windowed(16)
-        println(groups)
+        val groups = line.windowed(14)
+        println(groups.size)
         var done = false
         groups.forEach {
 
             if (!done) {
-                if (it.toSet().size == 16) {
+                if (it.toSet().size == 14) {
                     done = true
                     result = letters
                 }
-                letters += 16
+                letters += it.length
             }
         }
 
