@@ -92,40 +92,6 @@ class Day06(
                 letters += 16
             }
         }
-//        if (result != 0) {
-//            line.forEach {
-//                this4.add(it)
-//                if (this4.size == 4) {
-//
-//
-//
-//                    this4 = mutableListOf()
-//                }
-//            }
-//        }
-        val fours = mutableListOf<String>()
-
-        line.forEach {
-            if (fours.isNotEmpty()) {
-                if (fours[fours.lastIndex].length >= 4) {
-                    fours.add(it.toString())
-                } else {
-                    fours.set(fours.lastIndex, fours[fours.lastIndex] + it)
-                }
-            } else {
-                fours.add(it.toString())
-            }
-        }
-//        fours.forEachIndexed { index, s ->
-//            if (result <= 0) {
-////                println("index :$index, $s")
-////                println(s.toSet().toList().toString())
-//                if (s.toSet().toList().size == 4) {
-//                    result = letters
-//                }
-//            }
-//            letters += 4
-//        }
 
         return result
     }
