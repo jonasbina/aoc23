@@ -22,9 +22,9 @@ class Day07(
     }
 
     fun part1(): Any {
-        var location = ""
+        var location = mutableListOf<String>()
 
-        val files = mutableMapOf<String,Int>()
+        var files = mutableMapOf<String,Int>()
 
         inputLines.forEach {
             if (it.startsWith('$')){
@@ -36,39 +36,41 @@ class Day07(
                     val arg = s[1]
 
                     if (arg == "/"){
-                        location=""
+                        location= mutableListOf("/")
                     }else{
                         if (arg==".."){
-                            var l = location.split('/').toMutableList()
-                            l.drop(1)
-                            l = l.reversed().drop(1).reversed().toMutableList()
-                            var s = ""
-                            l.drop(1).forEach {
-                                println("$s, /$it}")
-                                s+="/$it"
-                            }
-                            location=s
+                            location = location.dropLast(1).toMutableList()
 
                         }else{
-                        location+= "/$arg"
+                        location.add(arg)
                         }
                     }
                 }
             }else{
                 val split = it.split(' ')
                 val bytes = split[0].toIntOrNull()
-                val s = location.split('/')
-                val dir = s[s.lastIndex]
+                if (location.isEmpty()){
+                    if (bytes!=null){
+                    files.put("/", bytes!!)
+                    }else{
+                        files.put("/", 0)
+                    }
+                }else{
+                val dirs = location
+
                 if (bytes!=null){
+                    dirs.forEach {dir->
                     if (files.contains(dir)){
                         val dr = files[dir]
                         files[dir] = dr!!+bytes
                     }else{
                         files[dir] = bytes
-                    }
-                }
+                    }}
+
+                }}
             }
         }
+        println(files)
         return files.filter { it.value<=100000 }.values.sum()
     }
 
