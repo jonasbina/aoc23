@@ -143,7 +143,7 @@ class Day07(
         val spaceLeft = totalSpace - spaceFilled
         val spaceNeeded = neededSpace-spaceLeft
         println("$spaceNeeded is needed")
-        return files.filter { it.value>=spaceNeeded}.values.reversed().first()
+        return files.filter { it.value >= spaceNeeded }.values.minOf { it }
 
     }
 }
