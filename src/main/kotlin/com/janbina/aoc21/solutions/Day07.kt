@@ -22,11 +22,13 @@ class Day07(
     }
 
     fun part1(): Any {
+
         var location = mutableListOf<String>()
 
         var files = mutableMapOf<String,Int>()
 
         inputLines.forEach {
+
             if (it.startsWith('$')){
                 val new = it.drop(2)
                 val s = new.split(" ")
@@ -42,7 +44,11 @@ class Day07(
                             location = location.dropLast(1).toMutableList()
 
                         }else{
-                        location.add(arg)
+                            var buildName = "/"
+                            location.drop(1).forEach {
+                                buildName+= "$it/"
+                            }
+                        location.add("$buildName$arg/")
                         }
                     }
                 }
@@ -70,12 +76,74 @@ class Day07(
                 }}
             }
         }
+
         println(files)
         return files.filter { it.value<=100000 }.values.sum()
     }
 
     fun part2(): Any {
+        val totalSpace = 70000000
+        val neededSpace  =30000000
+        var location = mutableListOf<String>()
 
-        return 0
+        var files = mutableMapOf<String,Int>()
+
+        inputLines.forEach {
+
+            if (it.startsWith('$')){
+                val new = it.drop(2)
+                val s = new.split(" ")
+
+                val command = s[0]
+                if (command=="cd"){
+                    val arg = s[1]
+
+                    if (arg == "/"){
+                        location= mutableListOf("/")
+                    }else{
+                        if (arg==".."){
+                            location = location.dropLast(1).toMutableList()
+
+                        }else{
+                            var buildName = "/"
+                            location.drop(1).forEach {
+                                buildName+= "$it/"
+                            }
+                            location.add("$buildName$arg/")
+                        }
+                    }
+                }
+            }else{
+                val split = it.split(' ')
+                val bytes = split[0].toIntOrNull()
+                if (location.isEmpty()){
+                    if (bytes!=null){
+                        files.put("/", bytes!!)
+                    }else{
+                        files.put("/", 0)
+                    }
+                }else{
+                    val dirs = location
+
+                    if (bytes!=null){
+                        dirs.forEach {dir->
+                            if (files.contains(dir)){
+                                val dr = files[dir]
+                                files[dir] = dr!!+bytes
+                            }else{
+                                files[dir] = bytes
+                            }}
+
+                    }}
+            }
+        }
+        val spaceFilled= files["/"]!!
+
+
+        val spaceLeft = totalSpace - spaceFilled
+        val spaceNeeded = neededSpace-spaceLeft
+        println("$spaceNeeded is needed")
+        return files.filter { it.value>=spaceNeeded}.values.reversed().first()
+
     }
 }
