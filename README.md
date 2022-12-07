@@ -9,9 +9,9 @@ Stats:
 |  2  |   done   |       |   done   |       |
 |  3  |   done   |       |   done   |       |
 |  4  |   done   |       |   done   |       |
-|  5  |          |       |          |       |
-|  6  |          |       |          |       |
-|  7  |          |       |          |       |
+|  5  |   done   |       |   done   |       |
+|  6  |   done   |       |   done   |       |
+|  7  |   done   |       |   done   |       |
 |  8  |          |       |          |       |
 |  9  |          |       |          |       |
 | 10  |          |       |          |       |
