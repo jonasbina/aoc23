@@ -25,38 +25,45 @@ class Day08(
         var sum = 0
         val colums = inputLines.size - 1
         val columns = mutableListOf<MutableList<Int>>()
+        //                              X   Y
+        val seeableTrees = mutableListOf<Pair<Int,Int>>()
 
         inputLines.forEachIndexed { index, s ->
             s.forEachIndexed { ind, c ->
                 if (columns.lastIndex >= ind) {
-                    columns[ind].set(index, c.toInt())
+                    columns[ind].add(index, c.toInt())
+                }else{
+                    columns.add(ind, mutableListOf(c.toInt()))
                 }
             }
         }
 
-        inputLines.forEach { line ->
+        inputLines.forEachIndexed { index, line ->
             var highest = 0
-            line.forEach {
+            line.forEachIndexed { ind, it ->
 
                 val num = it.toInt()
                 if (num > highest) {
                     highest = num
-                    sum++
+                    seeableTrees.add(Pair(index,ind))
                 }
             }
 
         }
+        println(columns)
         columns.forEachIndexed { index, ints ->
             var height = 0
-            ints.forEach {
+            ints.forEachIndexed { ind, it ->
                 if (it > height) {
                     height = it
-                    sum++
+
+                    seeableTrees.add(Pair(index,ind))
+                    println("adding a tree to $index for x and $ind for y")
                 }
             }
         }
 
-        return sum
+        return seeableTrees.toSet().size
     }
 
     fun part2(): Any {
