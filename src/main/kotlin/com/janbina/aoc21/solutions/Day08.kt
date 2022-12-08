@@ -50,10 +50,33 @@ class Day08(
             }
 
         }
+        inputLines.forEachIndexed { index, line ->
+            var highest = 0
+            line.reversed().forEachIndexed { indd, it ->
+                val ind = line.length-1-indd
+                val num = it.toInt()
+                if (num > highest) {
+                    highest = num
+                    seeableTrees.add(Pair(index,ind))
+                }
+            }
+        }
         println(columns)
         columns.forEachIndexed { index, ints ->
             var height = 0
             ints.forEachIndexed { ind, it ->
+                if (it > height) {
+                    height = it
+
+                    seeableTrees.add(Pair(index,ind))
+                    println("adding a tree to $index for x and $ind for y")
+                }
+            }
+        }
+        columns.forEachIndexed { index, ints ->
+            var height = 0
+            ints.reversed().forEachIndexed { indd, it ->
+                val ind = ints.lastIndex-indd
                 if (it > height) {
                     height = it
 
