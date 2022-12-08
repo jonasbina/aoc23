@@ -43,7 +43,6 @@ class Day08(
                     highest = num
                     sum++
                 }
-
             }
 
         }
