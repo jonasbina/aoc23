@@ -22,8 +22,8 @@ class Day08(
     }
 
     fun part1(): Any {
-        var sum = 0
-        val colums = inputLines.size - 1
+
+
         val columns = mutableListOf<MutableList<Int>>()
         //                              X   Y
         val seeableTrees = mutableListOf<Pair<Int,Int>>()
