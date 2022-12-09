@@ -78,7 +78,7 @@ class Day09(
         return locations.toSet().size
     }
     fun part2(): Any {
-        val locations = mutableListOf<Location>()
+        val locations = mutableMapOf<Location,Int>()
         var xH = 0
         var yH=4
 
@@ -86,7 +86,7 @@ class Day09(
         for (i in 1..9){
             tails.add(Tail(xH,yH))
         }
-        locations.add(Location(xH,yH))
+        locations.put(Location(xH,yH),9)
         inputLines.forEach {s->
             val command = s.split(' ')
             val direction = command[0]
@@ -115,7 +115,11 @@ class Day09(
                         val previous = tails[index-1]
                         tail.move(previous.x,previous.y)
                     }
-                    locations.add(Location(tail.x,tail.y))
+                    val l = Location(tail.x,tail.y)
+                    if (locations.contains(l)){
+                    locations[l] = locations[l]!!+1}else{
+                        locations.put(l,1)
+                    }
                 }
 
             }
@@ -124,7 +128,7 @@ class Day09(
             }
         }
 
-        return locations.toSet().size
+        return locations.size
     }
 
 
