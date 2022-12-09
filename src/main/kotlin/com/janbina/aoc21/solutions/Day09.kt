@@ -4,7 +4,7 @@ import com.janbina.aoc20.utils.Input
 import kotlin.math.absoluteValue
 
 fun main() {
-    val input = Input.getDayInputLines(100)
+    val input = Input.getDayInputLines(9)
     Day09(input).also {
         println(it.part1())
         println(it.part2())
@@ -92,8 +92,7 @@ class Day09(
             val direction = command[0]
             val length = command[1].toInt()
             for(i in 1..length){
-                var xMove = 0
-                var yMove =0
+
                 if (direction== "U"){
                     yH--
                 }
@@ -115,11 +114,14 @@ class Day09(
                         val previous = tails[index-1]
                         tail.move(previous.x,previous.y)
                     }
-                    val l = Location(tail.x,tail.y)
-                    if (locations.contains(l)){
+
+
+                }
+                val tail = tails[tails.lastIndex]
+                val l = Location(tail.x,tail.y)
+                if (locations.contains(l)){
                     locations[l] = locations[l]!!+1}else{
-                        locations.put(l,1)
-                    }
+                    locations.put(l,1)
                 }
 
             }
