@@ -10,12 +10,12 @@ fun main() {
         println(it.part2())
     }
 }
-public var monkeys =  mutableListOf<Monkey>()
+
 
 class Day11(
     private val inputLines: List<String>
 ) {
-
+    private var monkeys =  mutableListOf<Monkey>()
     private val inputInts by lazy { inputLines.map { it.toInt() } }
     private val inputLinesSplitted by lazy {
         inputLines.map {
@@ -37,11 +37,13 @@ class Day11(
 
         for (round in 0..19){
             monkeys.forEach {
-                it.operationOnStartingItems()
+                it.operationOnStartingItems(monkeys)
             }
         }
-       val best = monkeys.sortedBy { it.interactions }.take(2)
-
+       val best = monkeys.sortedBy { it.interactions }.reversed().take(2)
+       best.forEach {
+           println(it.interactions)
+       }
         return best[0].interactions*best[1].interactions
     }
 
@@ -49,55 +51,66 @@ class Day11(
 
         return 0
     }
+
+    class Monkey(
+        var startingItems : MutableList<Int>,
+        //Operation is in format like that: "* 6"
+        var operation: String,
+        var testDivisibleBy :Int,
+        var indexOfTrueMonkey : Int,
+        var indexFalseMonkey : Int,
+        var interactions :Int
+
+    ){
+
+        fun whichMonkeyThrowTo(item:Int):Int{
+            if (item%testDivisibleBy==0){
+                return indexOfTrueMonkey
+            }else{
+                return indexFalseMonkey
+            }
+        }
+        fun operationOnStartingItems(monkeys:List<Monkey>){
+            val l = mutableListOf<Int>()
+            val o = operation.split(' ')[0]
+            val num = operation.split(' ')[1]
+
+            startingItems.forEach {
+                var sum = 0
+                interactions++
+                if (o=="*"){
+                    if (num=="old"){
+                        sum = it*it
+                    }else {
+                        sum = it * num.toInt()
+                    }
+                }
+                if (o=="+"){
+                    if (num=="old"){
+                        sum = it+it
+                    }else {
+                        sum =it + num.toInt()
+                    }
+                }
+                sum = (floor(((sum/3)/10).toDouble())*10).toInt()
+                l.add(sum)
+
+            }
+            startingItems=l.toList().toMutableList()
+
+
+            l.forEachIndexed { index, i ->
+
+                monkeys[whichMonkeyThrowTo(i)].startingItems.add(i)
+
+                startingItems.removeAt(startingItems.indexOf(i))
+
+            }
+
+
+
+        }
+
+    }
 }
 
-class Monkey(
-    var startingItems : MutableList<Int>,
-    //Operation is in format like that: "* 6"
-    var operation: String,
-    var testDivisibleBy :Int,
-    var indexOfTrueMonkey : Int,
-    var indexFalseMonkey : Int,
-    var interactions :Int
-
-){
-    fun whichMonkeyThrowTo(item:Int):Int{
-        if (item%testDivisibleBy==0){
-            return indexOfTrueMonkey
-        }else{
-            return indexFalseMonkey
-        }
-    }
-    fun operationOnStartingItems():List<Int>{
-        val l = mutableListOf<Int>()
-        val o = operation.split(' ')[0]
-        val num = operation.split(' ')[1]
-
-        startingItems.forEach {
-            var sum = 0
-            interactions++
-            if (o=="*"){
-                if (num=="old"){
-                    sum = it*it
-                }else {
-                    sum = it * num.toInt()
-                }
-            }
-            if (o=="+"){
-                if (num=="old"){
-                    sum = it+it
-                }else {
-                    sum =it + num.toInt()
-                }
-            }
-            sum = (floor(((sum/3)/10).toDouble())*10).toInt()
-
-             monkeys[whichMonkeyThrowTo(sum)].startingItems.add(sum)
-
-        }
-
-
-        return l
-    }
-
-}
