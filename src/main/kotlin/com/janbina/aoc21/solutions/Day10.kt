@@ -60,42 +60,61 @@ class Day10(
         val listOfCycles = listOf(20, 60, 100, 140, 180, 220)
         var toAdd = mutableListOf<Int>()
         var cycles = mutableListOf<Int>()
-        var i = 0
+        var i = -1
         var xPerCycle = mutableListOf<Int>()
-        while (i<=inputLines.lastIndex-1){
+        var noop =false
 
-           cycle++
+        while (i<=inputLines.lastIndex-1) {
+            cycle++
 
 
 
-            if (toAdd.isNotEmpty()){
-                x+=toAdd[0]
+
+            if (toAdd.isNotEmpty()) {
+                x += toAdd[0]
                 println("new $x after adding ${toAdd[0]}")
                 toAdd = mutableListOf()
-            }else{
-                i++
-                val s = inputLines[i].split(' ')
-            if (s[0] == "addx"){
-                val num = s[1].toInt()
-                toAdd.add(num)
-                println("adding $num, x is $x")
             }
-                if (s[0] == "noop"){
-                    toAdd.add(0)
+            if (!noop) {
+                i++
+
+
+                val s = inputLines[i].split(' ')
+                if (s[0] == "addx") {
+                    val num = s[1].toInt()
+                    toAdd.add(num)
+                    println("adding $num, x is $x")
                 }
 
 
-        }
-            xPerCycle.add(x)
 
-            if (listOfCycles.contains(cycle)){
-                cycles.add(x*cycle)
-                println("as $cycle adding ${x*cycle}")
+                xPerCycle.add(x)
+
+                if (listOfCycles.contains(cycle)) {
+                    cycles.add(x * cycle)
+                    println("as $cycle adding ${x * cycle}")
+                }
+                println("After cycle $cycle x is $x, and the line was ${inputLines[i]}")
+                if (inputLines[i] == "noop") {
+
+                    noop = true
+
+                }
+            }else{
+                noop=false
             }
+
+
         }
 
+        if (toAdd.isNotEmpty()) {
+            cycle++
+            x += toAdd[0]
+            println("After cycle $cycle x is $x, and the line was ${inputLines[i]}")
+            println("new $x after adding ${toAdd[0]}")
 
+        }
         println(cycles)
-        return cycles.sum()
+        return x*cycle
     }
 }
