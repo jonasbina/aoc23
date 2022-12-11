@@ -2,6 +2,7 @@ package com.janbina.aoc20.solutions
 
 import com.janbina.aoc20.utils.Input
 import kotlin.math.floor
+import kotlin.math.round
 
 fun main() {
     val input = Input.getDayInputLines(11)
@@ -33,12 +34,27 @@ class Day11(
         monkeys.add(Monkey(mutableListOf(69, 97, 88, 93),"* old",5,7,2,0))
         monkeys.add(Monkey(mutableListOf(59, 80),"+ 6",11,2,3,0))
 
+//        monkeys.add(Monkey(mutableListOf(79, 98),"* 19",23,2,3,0))
+//        monkeys.add(Monkey(mutableListOf(54, 65, 75, 74),"+ 6",19,2,0,0))
+//        monkeys.add(Monkey(mutableListOf(79, 60,97),"* old",13,1,3,0))
+//        monkeys.add(Monkey(mutableListOf(74),"+ 3",17,0,1,0))
 
 
-        for (round in 0..19){
+        for (round in 1..20){
+            println("${round-1}")
+
             monkeys.forEach {
+                println("items ${it.startingItems}")
+                println("interactions ${it.interactions}")
                 it.operationOnStartingItems(monkeys)
             }
+            var s = "After round $round, monkeys are holding following items: \n"
+            monkeys.forEach {
+                s+=it.startingItems+"\n"
+            }
+            println(s)
+
+
         }
        val best = monkeys.sortedBy { it.interactions }.reversed().take(2)
        best.forEach {
@@ -92,8 +108,8 @@ class Day11(
                         sum =it + num.toInt()
                     }
                 }
-                sum = (floor(((sum/3)/10).toDouble())*10).toInt()
-                l.add(sum)
+
+                l.add(round(((sum/3).toDouble())).toInt())
 
             }
             startingItems=l.toList().toMutableList()

@@ -3,9 +3,9 @@ package com.janbina.aoc20.solutions
 import com.janbina.aoc20.utils.Input
 
 fun main() {
-    val input = Input.getDayInputLines(100)
+    val input = Input.getDayInputLines(10)
     Day10(input).also {
-        println(it.part3())
+        println(it.part1())
         println(it.part2())
     }
 }
@@ -22,39 +22,35 @@ class Day10(
     }
 
     fun part1(): Any {
-        var cycle = 0
-        var x= 1
+
+        var x = 1
         val listOfCycles = listOf(20, 60, 100, 140, 180, 220)
-        var cycles = mutableListOf<Int>()
-        inputLines.forEach {
-            cycle++
-            if (it.split(' ')[0] == "addx"){
-                var num = it.split(' ')[1].toInt()
-                for (i in 1..num){
-                    if (listOfCycles.contains(cycle)){
-                        println("Adding $x * $cycle == ${x*cycle}")
-                        cycles.add(x*cycle)
-                    }
+        val xList = mutableListOf<Int>()
+       xList.add(0)
 
-                    cycle++
+        inputLines.forEachIndexed { index, s ->
 
-                }
-                x+=num
-            }
-            if (listOfCycles.contains(cycle)){
-                println("Adding $x * $cycle == ${x*cycle}")
-                cycles.add(x*cycle)
+            xList.add(x)
+            val split = s.split(' ')
+            if (split[0] == "addx") {
+                xList.add(x)
+                val num = split[1].toInt()
+                x += num
             }
         }
 
-        return cycles.sum()
+        xList.add(x)
+
+
+        return xList.filterIndexed { index,_ -> index in listOfCycles }.mapIndexed { index, i ->  i*listOfCycles[index]}.sum()
     }
 
     fun part2(): Any {
 
         return 0
     }
-    fun part3():Any{
+
+    fun part3(): Any {
         var cycle = 0
         var x = 1
         val listOfCycles = listOf(20, 60, 100, 140, 180, 220)
@@ -62,9 +58,9 @@ class Day10(
         var cycles = mutableListOf<Int>()
         var i = -1
         var xPerCycle = mutableListOf<Int>()
-        var noop =false
+        var noop = false
 
-        while (i<=inputLines.lastIndex-1) {
+        while (i <= inputLines.lastIndex - 1) {
             cycle++
 
 
@@ -100,8 +96,8 @@ class Day10(
                     noop = true
 
                 }
-            }else{
-                noop=false
+            } else {
+                noop = false
             }
 
 
@@ -115,6 +111,6 @@ class Day10(
 
         }
         println(cycles)
-        return x*cycle
+        return x * cycle
     }
 }
