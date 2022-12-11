@@ -61,17 +61,14 @@ class Day10(
         var toAdd = mutableListOf<Int>()
         var cycles = mutableListOf<Int>()
         var i = 0
+        var xPerCycle = mutableListOf<Int>()
         while (i<=inputLines.lastIndex-1){
 
            cycle++
-            if (listOfCycles.contains(cycle)){
-                cycles.add(x*cycle)
-                println("as $cycle adding ${x*cycle}")
-            }
+
 
 
             if (toAdd.isNotEmpty()){
-
                 x+=toAdd[0]
                 println("new $x after adding ${toAdd[0]}")
                 toAdd = mutableListOf()
@@ -82,11 +79,19 @@ class Day10(
                 val num = s[1].toInt()
                 toAdd.add(num)
                 println("adding $num, x is $x")
-
-
             }
+                if (s[0] == "noop"){
+                    toAdd.add(0)
+                }
+
 
         }
+            xPerCycle.add(x)
+
+            if (listOfCycles.contains(cycle)){
+                cycles.add(x*cycle)
+                println("as $cycle adding ${x*cycle}")
+            }
         }
 
 
