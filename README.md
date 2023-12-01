@@ -5,15 +5,15 @@ My solutions for [advent of code 2022](https://adventofcode.com/2022) in Kotlin.
 Stats:
 | Day |  Part 1  |       |  Part 2  |       |
 |----:|----------|------:|----------|------:|
-|  1  |   done   |       |   done   |       |
-|  2  |   done   |       |   done   |       |
-|  3  |   done   |       |   done   |       |
-|  4  |   done   |       |   done   |       |
-|  5  |   done   |       |   done   |       |
-|  6  |   done   |       |   done   |       |
-|  7  |   done   |       |   done   |       |
-|  8  |   done   |       |   done   |       |
-|  9  |   done   |       |   done   |       |
+|  1  |   done   |       |          |       |
+|  2  |          |       |          |       |
+|  3  |          |       |          |       |
+|  4  |          |       |          |       |
+|  5  |          |       |          |       |
+|  6  |          |       |          |       |
+|  7  |          |       |          |       |
+|  8  |          |       |          |       |
+|  9  |          |       |          |       |
 | 10  |          |       |          |       |
 | 11  |          |       |          |       |
 | 12  |          |       |          |       |
