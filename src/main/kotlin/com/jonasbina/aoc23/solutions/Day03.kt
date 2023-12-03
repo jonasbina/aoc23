@@ -1,9 +1,6 @@
-package com.janbina.aoc20.solutions
+package com.jonasbina.aoc23.solutions
 
 import com.janbina.aoc20.utils.Input
-import com.jonasbina.aoc23.solutions.Day01
-import java.lang.Exception
-import kotlin.random.Random
 
 fun main() {
     val input = Input.getDayInputLines(3)
@@ -13,6 +10,7 @@ fun main() {
     }
 }
 
+@Suppress("MemberVisibilityCanBePrivate")
 class Day03(
     private val inputLines: List<String>
 ) {
@@ -25,6 +23,7 @@ class Day03(
     }
 
     fun part1(): Any {
+        retrieveSymbols()
         var sum = 0
         inputLines.forEachIndexed {lineIndex, line->
             var symbol = false
@@ -61,7 +60,20 @@ class Day03(
         }
         return sum
     }
-    val symbols = "!@#$%^&*()_-+=~`';:}[{]/>?,<|"
+    lateinit var symbols: String
+    fun retrieveSymbols():Int{
+        val symbolss = mutableListOf<Char>()
+        inputLines.forEach {
+            it.forEach {
+                if (!it.isDigit()&&it!='.'){
+                    symbolss.add(it)
+                }
+            }
+        }
+        symbols = symbolss.toSet().joinToString("")
+        return 0
+    }
+
 
     fun Char.isSymbol(): Boolean {
         return symbols.contains(this)
