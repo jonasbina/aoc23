@@ -80,7 +80,6 @@ class Day03(
     }
 
     fun part2(): Any {
-
         return 0
     }
 }
