@@ -21,7 +21,6 @@ class Day03(
             it.split(",")
         }
     }
-
     fun part1(): Any {
         var sum = 0
         inputLines.forEachIndexed {lineIndex, line->
@@ -59,7 +58,7 @@ class Day03(
         }
         return sum
     }
-    fun Char.isSymbol() = !isDigit() && this != '.'
+    fun Char.isSymbol() = !isDigit() && !equals('.')
     fun areSymbolsAround(lineIndex:Int, index:Int):Boolean{
         if (inputLines.size-1>=lineIndex+1){
             val nextLine = inputLines[lineIndex+1]
