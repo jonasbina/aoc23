@@ -23,7 +23,6 @@ class Day03(
     }
 
     fun part1(): Any {
-        retrieveSymbols()
         var sum = 0
         inputLines.forEachIndexed {lineIndex, line->
             var symbol = false
@@ -60,24 +59,7 @@ class Day03(
         }
         return sum
     }
-    lateinit var symbols: String
-    fun retrieveSymbols():Int{
-        val symbolss = mutableListOf<Char>()
-        inputLines.forEach {
-            it.forEach {
-                if (!it.isDigit()&&it!='.'){
-                    symbolss.add(it)
-                }
-            }
-        }
-        symbols = symbolss.toSet().joinToString("")
-        return 0
-    }
-
-
-    fun Char.isSymbol(): Boolean {
-        return symbols.contains(this)
-    }
+    fun Char.isSymbol() = !isDigit() && this != '.'
     fun areSymbolsAround(lineIndex:Int, index:Int):Boolean{
         if (inputLines.size-1>=lineIndex+1){
             val nextLine = inputLines[lineIndex+1]
