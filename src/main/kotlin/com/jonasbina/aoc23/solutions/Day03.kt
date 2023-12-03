@@ -99,7 +99,7 @@ class Day03(
             val startIndex = it.index-size
             val line = it.lineIndex
             if (abs( lineIndex - line) <=1){
-                if (index in startIndex-1 .. endIndex+1){
+                if (index in startIndex .. endIndex+1){
                     around.add(it)
                 }
             }
