@@ -35,6 +35,7 @@ class Day03(
                     if (areSymbolsAround(lineIndex, index)){
                         symbol = true
                     }
+
                 }else{
                     val areSymbolsAround = areSymbolsAround(lineIndex, index)
                     if (areSymbolsAround){
@@ -50,6 +51,11 @@ class Day03(
 
                     }
                     currentInt = ""
+                }
+                if(index==line.lastIndex&&currentInt.isNotEmpty()){
+                    if (symbol){
+                        sum+=currentInt.toInt()
+                    }
                 }
             }
         }
