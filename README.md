@@ -8,7 +8,7 @@ Stats:
 |  1  |   done   |       |          |       |
 |  2  |   done   |       |   done   |       |
 |  3  |   done   |       |   done   |       |
-|  4  |          |       |          |       |
+|  4  |   done   |       |   done   |       |
 |  5  |          |       |          |       |
 |  6  |          |       |          |       |
 |  7  |          |       |          |       |
