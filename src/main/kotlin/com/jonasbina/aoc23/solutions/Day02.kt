@@ -17,7 +17,7 @@ class Day02(
 ) {
 
     private val inputInts by lazy { inputLines.map { it.toInt() } }
-    private val inputLinesSplitted by lazy {
+    private val inputLinesSplit by lazy {
         inputLines.map {
             it.split(":")
         }
@@ -25,7 +25,7 @@ class Day02(
 
     fun part1(): Any {
         var sum = 0
-        inputLinesSplitted.forEach {
+        inputLinesSplit.forEach {
             val game = it[0]
             val packs = it[1]
             var valid = true
@@ -64,7 +64,7 @@ class Day02(
 
     fun part2(): Any {
         var sum = 0
-        inputLinesSplitted.forEach {
+        inputLinesSplit.forEach {
             val game = it[0]
             val packs = it[1]
             var redMax = 0

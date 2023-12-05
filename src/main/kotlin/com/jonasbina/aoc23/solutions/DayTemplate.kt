@@ -5,6 +5,7 @@ import com.jonasbina.aoc23.solutions.Day01
 
 fun main() {
     val input = Input.getDayInputLines(1)
+    val testInput = Input.getTestInputLines(1)
     Day01(input).also {
         println(it.part1())
         println(it.part2())
@@ -16,7 +17,7 @@ class Day0(
 ) {
 
     private val inputInts by lazy { inputLines.map { it.toInt() } }
-    private val inputLinesSplitted by lazy {
+    private val inputLinesSplit by lazy {
         inputLines.map {
             it.split(",")
         }

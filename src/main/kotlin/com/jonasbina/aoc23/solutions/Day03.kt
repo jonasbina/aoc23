@@ -18,7 +18,7 @@ class Day03(
 ) {
 
     private val inputInts by lazy { inputLines.map { it.toInt() } }
-    private val inputLinesSplitted by lazy {
+    private val inputLinesSplit by lazy {
         inputLines.map {
             it.split(",")
         }
