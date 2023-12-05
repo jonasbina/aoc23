@@ -5,7 +5,7 @@ My solutions for [advent of code 2022](https://adventofcode.com/2022) in Kotlin.
 Stats:
 | Day |  Part 1  |       |  Part 2  |       |
 |----:|----------|------:|----------|------:|
-|  1  |   done   |       |          |       |
+|  1  |   done   |       |   done   |       |
 |  2  |   done   |       |   done   |       |
 |  3  |   done   |       |   done   |       |
 |  4  |   done   |       |   done   |       |

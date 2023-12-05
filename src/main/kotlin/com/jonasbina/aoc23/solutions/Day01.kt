@@ -6,8 +6,8 @@ import kotlin.random.Random
 fun main() {
     val input = Input.getDayInputLines(1)
     Day01(input).also {
-//        println(it.part1())
-        println(it.part22())
+        println(it.part1())
+        println(it.part2())
     }
 }
 
@@ -29,9 +29,10 @@ class Day01(
         }.sum()
     }
 
+
+    //we are gonna act like this is my first try on part 2
     fun part2(): Any {
-        val startTime = System.currentTimeMillis()
-        val stringDigits = mapOf(
+        val stringDigitMap = mapOf(
             "one" to 1,
             "two" to 2,
             "three" to 3,
@@ -42,98 +43,21 @@ class Day01(
             "eight" to 8,
             "nine" to 9
         )
-        var sum = 0
-        inputLines.forEach { line ->
-            var firstInt:Int? = null
-            var lastInt:Int? = null
-            var currentStringInt = ""
-            line.forEach {
-                if (it.isDigit()){
-                    currentStringInt = ""
-                    if(firstInt==null){
-                        firstInt = it.toString().toInt()
-                    }
-                    lastInt = it.toString().toInt()
-                }else{
-                    currentStringInt+=it
-                    for (i in 0.. currentStringInt.lastIndex){
-                        val partOfCurrentStringInt = currentStringInt.drop(i)
-                        if (stringDigits.containsKey(partOfCurrentStringInt)){
-                            val digit = stringDigits.get(partOfCurrentStringInt)
-                            if (firstInt==null){
-                                firstInt = digit
-                            }
-                            lastInt = digit
-                            currentStringInt = ""
-                            break
-                        }
-                    }
-                }
+        return inputLines.map{
+
+            val digits = it.mapIndexed { index, c -> Pair(index, c) }.filter { it.second.isDigit() }.map { Pair(it.first, it.second.toString().toInt()) }
+            val lastStringDigit = it.findLastAnyOf(stringDigitMap.keys)
+            val firstStringDigit = it.findAnyOf(stringDigitMap.keys)
+            val allDigits = mutableListOf<Pair<Int, Int>>()
+            allDigits.addAll(digits)
+            if (firstStringDigit!=null){
+                allDigits.add(Pair(firstStringDigit.first, stringDigitMap.get(firstStringDigit.second)!!))
             }
-            val x = "$firstInt$lastInt".toInt()
-
-//            println("Line: $it \n $firstInt, $lastInt")
-//            println(x)
-            sum+=x
-        }
-        println("Took ${System.currentTimeMillis()-startTime} millis!")
-        return sum
-    }
-    fun part22():Any{
-        var sum = 0
-
-        inputLines.forEach {
-            val digits = mutableListOf<Int>()
-            var currentString = ""
-            val alreadyFoundStringInt = mutableListOf<Int>()
-            it.forEach { c->
-                if (c.isDigit()){
-                    digits.add(c.toString().toInt())
-                    currentString = ""
-                }else{
-                    currentString+=c
-                    val fromString = getDigitsFromString(currentString)
-                    fromString.forEach { digit->
-
-
-                        if (!alreadyFoundStringInt.contains(digit)){
-                            digits.add(digit)
-                            alreadyFoundStringInt.add(digit)
-                        }
-                    }
-                }
-
+            if (lastStringDigit!=null){
+                allDigits.add(Pair(lastStringDigit.first, stringDigitMap.get(lastStringDigit.second)!!))
             }
-            println(it)
-            println(digits.joinToString(","))
-            val firstLast = "${digits.first()}${digits.last()}".toInt()
-            println(firstLast)
-            sum+=firstLast
-        }
-        return sum
-    }
-    fun getDigitsFromString(currentString: String):List<Int>{
-        val stringDigits = mapOf(
-            "one" to 1,
-            "two" to 2,
-            "three" to 3,
-            "four" to 4,
-            "five" to 5,
-            "six" to 6,
-            "seven" to 7,
-            "eight" to 8,
-            "nine" to 9
-        ).entries
-        var i = 0
-        val res = mutableListOf<Int>()
-        while (i<stringDigits.size){
-            val entry = stringDigits.toList()[i]
-            if (currentString.contains(entry.key)){
-                res.add(entry.value)
-            }
-
-            i++
-        }
-        return res
+            val sorted = allDigits.sortedBy { it.first }.map { it.second }
+            "${sorted.first()}${sorted.last()}".toInt()
+        }.sum()
     }
 }
