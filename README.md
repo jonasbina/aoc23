@@ -11,8 +11,8 @@ Stats:
 |  4  |   done   |       |   done   |       |
 |  5  |   done   |       |   done   |       |
 |  6  |   done   |       |   done   |       |
-|  7  |          |       |          |       |
-|  8  |          |       |          |       |
+|  7  |   done   |       |          |       |
+|  8  |   done   |       |   done   |       |
 |  9  |          |       |          |       |
 | 10  |          |       |          |       |
 | 11  |          |       |          |       |
