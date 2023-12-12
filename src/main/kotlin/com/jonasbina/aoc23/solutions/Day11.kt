@@ -9,7 +9,7 @@ import kotlin.math.sign
 fun main() {
     val input = Input.getDayInputLines(11)
     val testInput = Input.getTestInputLines(11)
-    val test = true
+    val test = false
     Day11(if (test) testInput else input).also {
         println(it.part1())
         println(it.part2())
@@ -28,11 +28,11 @@ class Day11(
     }
 
     fun part1(): Any {
-        val galaxies = mutableListOf<Pair<Int,Int>>()
+        val galaxies = mutableListOf<Pair<Long,Long>>()
         inputLines.forEachIndexed { y, s ->
             s.forEachIndexed { x, c ->
                 if (c=='#'){
-                    galaxies.add(Pair(x,y))
+                    galaxies.add(Pair(x.toLong(),y.toLong()))
                 }
             }
         }
@@ -49,7 +49,7 @@ class Day11(
             }
             Pair(newX, newY)
         }
-        val pairs = mutableListOf<Pair<Pair<Int,Int>,Pair<Int,Int>>>()
+        val pairs = mutableListOf<Pair<Pair<Long,Long>,Pair<Long,Long>>>()
         expandedGalaxies.forEach { first->
             expandedGalaxies.forEach { second->
                 if (first!=second){
@@ -77,11 +77,11 @@ class Day11(
         }.sum()/2
     }
     fun part2(): Any {
-        val galaxies = mutableListOf<Pair<Int,Int>>()
+        val galaxies = mutableListOf<Pair<Long,Long>>()
         inputLines.forEachIndexed { y, s ->
             s.forEachIndexed { x, c ->
                 if (c=='#'){
-                    galaxies.add(Pair(x,y))
+                    galaxies.add(Pair(x.toLong(),y.toLong()))
                 }
             }
         }
@@ -91,14 +91,14 @@ class Day11(
             var newX = galaxy.first
             var newY = galaxy.second
             emptyColumns.filter { it<galaxy.first}.forEach {
-                newX+=999_999
+                newX+=1000000
             }
             emptyRows.filter { it<galaxy.second}.forEach {
-                newY+=999_999
+                newY+=1000000
             }
             Pair(newX, newY)
         }
-        val pairs = mutableListOf<Pair<Pair<Int,Int>,Pair<Int,Int>>>()
+        val pairs = mutableListOf<Pair<Pair<Long,Long>,Pair<Long,Long>>>()
         expandedGalaxies.forEach { first->
             expandedGalaxies.forEach { second->
                 if (first!=second){
