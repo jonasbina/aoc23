@@ -10,8 +10,9 @@ object Input {
     fun getDayInputLines(day: Int): List<String> {
         return getDayInputFile(day).readLines()
     }
-
-
+    fun getTestInputText(day: Int): String {
+        return getTestInputFile(day).readText()
+    }
     private fun getDayInputFile(day: Int): File {
         return File(javaClass.classLoader.getResource(getDayInputFileName(day)).toURI())
     }
